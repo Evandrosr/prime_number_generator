@@ -10,9 +10,9 @@ Obs:Não é melhor maneira de escrever o código mas é a mais simples.
 
 Requisitos:
 -----------
--Python 3 `sudo apt-get install python3`
+- Python 3 ``sudo apt-get install python3``
 
 Como Utilizar:
 --------------
 
-`python3 prime_number_generator.py`
+``python3 prime_number_generator.py``
