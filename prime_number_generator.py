@@ -5,13 +5,15 @@ app = tkinter.Tk()
 app.title('Prime Number Generator')
 app.geometry('300x70')
 
-primos = [2,3]
+primos = [2, 3]
+
+
 def eh_primo(number):
     '''Retorna True caso number seja primo senão False.'''
     if number < 2:
         return False
     for i in primos:
-        if number%i == 0:
+        if number % i == 0:
             return False
         if i > math.sqrt(number):
             primos.append(number)
@@ -21,8 +23,7 @@ def eh_primo(number):
 
 
 def gerar():
-    '''Retorna um gerador de números primos.
-    '''
+    '''Retorna um gerador de números primos.'''
     yield 2
     yield 3
     number = 3
@@ -38,19 +39,20 @@ primo = gerar()
 def gera_primo():
     '''Exibe numero primo e agenda próximo em .5 segundos.'''
     valor.set(next(primo))
-    schedule.set(label.after(500,gera_primo))
+    schedule.set(label.after(500, gera_primo))
+
 
 def iniciar():
     '''Inicia números aleatórios.'''
-    if not  schedule.get():
+    if not schedule.get():
         gera_primo()
-
 
 
 def parar():
     '''Para o gerador mas não reinicia o gerador.'''
     label.after_cancel(schedule.get())
     schedule.set('')
+
 
 def desligar_app():
     '''Para o gerador e desliga o aplicativo.'''
@@ -72,7 +74,7 @@ valor = tkinter.IntVar()
 valor.set(2)
 '''Rótulo com valor primo'''
 label = tkinter.Label(app, textvariable=valor, font='36')
-label.pack(padx=10,pady=10)
+label.pack(padx=10, pady=10)
 '''Botão para iniciar o gerador de números primos'''
 botao_inicia = tkinter.Button(app, text='Iniciar', command=iniciar)
 botao_inicia.pack(side='left')
