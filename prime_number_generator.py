@@ -33,25 +33,23 @@ primo = gerar()
 def gera_primo():
     '''Exibe numero primo e agenda próximo em .5 segundos.
     Somente se status on.'''
-    if status.get() == 'on':
-        valor.set(next(primo))
-        schedule.set(label.after(500, gera_primo))
-
+    valor.set(next(primo))
+    schedule.set(label.after(500,gera_primo))
 
 def iniciar():
     '''Inicia números aleatórios.'''
-    status.set('on')
-    gera_primo()
+    if not  schedule.get():
+        gera_primo()
 
 
-def desligar():
+
+def parar():
     '''Para o gerador mas não reinicia o gerador.'''
-    status.set('off')
-
+    label.after_cancel(schedule.get())
+    schedule.set('')
 
 def desligar_app():
     '''Para o gerador e desliga o aplicativo.'''
-    status.set('off')
     label.after_cancel(schedule.get())
     app.destroy()
 
@@ -64,10 +62,7 @@ def reset():
 
 '''Anota o ultimo agendamento de geração de número'''
 schedule = tkinter.StringVar()
-schedule.set(None)
-'''Define status do gerador'''
-status = tkinter.StringVar()
-status.set('off')
+schedule.set('')
 '''Valor a ser exibido em tela'''
 valor = tkinter.IntVar()
 valor.set(2)
@@ -78,7 +73,7 @@ label.pack(padx=10,pady=10)
 botao_inicia = tkinter.Button(app, text='Iniciar', command=iniciar)
 botao_inicia.pack(side='left')
 '''Botão para parar ao gerador de números primos '''
-botao_desliga = tkinter.Button(app, text='Parar', command=desligar)
+botao_desliga = tkinter.Button(app, text='Parar', command=parar)
 botao_desliga.pack(side='left')
 '''Botão para reiniciar o gerador de números primos '''
 botao_reset = tkinter.Button(app, text='Reiniciar', command=reset)
