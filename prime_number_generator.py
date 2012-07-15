@@ -31,8 +31,7 @@ primo = gerar()
 
 
 def gera_primo():
-    '''Exibe numero primo e agenda próximo em .5 segundos.
-    Somente se status on.'''
+    '''Exibe numero primo e agenda próximo em .5 segundos.'''
     valor.set(next(primo))
     schedule.set(label.after(500,gera_primo))
 
