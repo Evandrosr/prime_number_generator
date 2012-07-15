@@ -1,17 +1,22 @@
 import tkinter
+import math
 '''Cria a interface gráfica'''
 app = tkinter.Tk()
 app.title('Prime Number Generator')
 app.geometry('300x70')
 
-
-def isprime(number):
+primos = [2,3]
+def eh_primo(number):
     '''Retorna True caso number seja primo senão False.'''
     if number < 2:
         return False
-    for i in range(2, number):
+    for i in primos:
         if number%i == 0:
             return False
+        if i > math.sqrt(number):
+            primos.append(number)
+            return True
+    primos.append(number)
     return True
 
 
@@ -23,7 +28,7 @@ def gerar():
     number = 3
     while True:
         number += 2
-        if isprime(number):
+        if eh_primo(number):
             yield number
 
 '''inicializa gerador de números primos.'''
